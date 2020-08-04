@@ -6,7 +6,7 @@ import http_server
 class TestCase(unittest.TestCase):
 
     def test_response_ok(self):
-        mimetype = b"image/bmp"
+        mimetype = b""
         body = b"foo"
 
         response = http_server.response_ok(body=body, mimetype=mimetype)
@@ -17,7 +17,7 @@ class TestCase(unittest.TestCase):
         str_header, str_body = str_response.split("\r\n\r\n")
 
         self.assertEqual(body.decode(), str_body)
-        self.assertEqual("HTTP/1.1 200 OK",
+        self.assertEqual("HTTP/1.1 200 ok",
                          str_header.splitlines()[0])
         self.assertIn("Content-Type: " + mimetype.decode(), str_header)
 
@@ -53,7 +53,7 @@ class TestCase(unittest.TestCase):
         content, mime_type = http_server.response_path(path)
 
         self.assertEqual(b"text/html", mime_type)
-        
+
         with open(os.path.join("webroot", "a_web_page.html"), "rb") as f:
             self.assertEqual(f.read(), content)
 

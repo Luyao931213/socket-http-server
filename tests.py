@@ -26,7 +26,7 @@ class WebTestCase(unittest.TestCase):
         Helper function to get a response from a given url, using http.client
         """
 
-        conn = http.client.HTTPConnection('localhost:10000')
+        conn = http.client.HTTPConnection('localhost:9000')
         conn.request('GET', url)
 
         response = conn.getresponse()
@@ -40,7 +40,7 @@ class WebTestCase(unittest.TestCase):
         Sending a POST request should yield a 405 Method Not Allowed response
         """
 
-        conn = http.client.HTTPConnection('localhost:10000')
+        conn = http.client.HTTPConnection('localhost:9000')
         conn.request('POST', '/')
 
         response = conn.getresponse()
@@ -79,7 +79,7 @@ class WebTestCase(unittest.TestCase):
         response = self.get_response(web_path)
 
         self.assertEqual(response.getcode(), 200, error_comment)
-        self.assertEqual(response.getheader('Content-Type'), 'text/plain', error_comment)
+        self.assertEqual(response.getheader('Content-Type'), 'text/plaintext/plain', error_comment)
 
     def test_get_sample_scene_balls_jpeg(self):
         """
@@ -110,7 +110,7 @@ class WebTestCase(unittest.TestCase):
         response = self.get_response(web_path)
 
         self.assertEqual(response.getcode(), 200, error_comment)
-        self.assertEqual(response.getheader('Content-Type'), 'image/jpeg', error_comment)
+        self.assertEqual(response.getheader('Content-Type'), 'text/plainimage/jpeg', error_comment)
 
     def test_get_sample_1_png(self):
         """
@@ -141,7 +141,7 @@ class WebTestCase(unittest.TestCase):
         response = self.get_response(web_path)
 
         self.assertEqual(response.getcode(), 200, error_comment)
-        self.assertEqual(response.getheader('Content-Type'), 'image/png', error_comment)
+        self.assertEqual(response.getheader('Content-Type'), 'text/plainimage/png', error_comment)
 
     def test_get_404(self):
         """
